@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+constructor(props) {
+    super(props);
+ 
+    this.state = {
+        likes: 100,
+        dislikes: 100,
+    };
+    this.onCLickLike = this.onClickLike.bind(this);
+    this.onCLickDislike = this.onClickDislike.bind(this);
+  }
+
+  onClickLike = () => this.setState({ likes: this.state.likes + 1, dislikes: this.state.dislikes - 1 })
+
+  onClickDislike = () => this.setState({ likes: this.state.likes - 1, dislikes: this.state.dislikes + 1 })
+
+
+  render() {
+    return (
+      <div> 
+        <div className = "container">
+          <div className = "button-wrapper">
+            <button id = "like" className = "button" onClick={() => this.onClickLike()}>Like</button>
+            <span className = "count">{this.state.likes}</span>
+          </div>
+          <div className = "button-wrapper">
+            <button id = "dislike" className = "button" onClick={() => this.onClickDislike()}>Dislike</button>
+            <span className = "count">{this.state.dislikes}</span>
+        </div>
+        </div>
+    </div> 
+    );
+  }
 }
 
 export default App;
